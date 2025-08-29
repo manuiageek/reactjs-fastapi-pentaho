@@ -1,0 +1,69 @@
+# Environnements virtuels
+.venv/
+venv/
+env/
+ENV/
+
+# Variables d'environnement
+.env
+.env.*
+!.env.example
+.envrc
+.direnv/
+
+# Artefacts Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+.ipynb_checkpoints/
+
+# Build et distribution
+build/
+dist/
+wheels/
+*.egg-info/
+.eggs/
+*.egg
+MANIFEST
+pip-wheel-metadata/
+
+# Caches et outils
+.cache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.tox/
+.nox/
+.pyre/
+.pytype/
+.hypothesis/
+
+# Couverture
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Logs
+logs/
+*.log
+
+# Binaire / packaging
+*.so
+*.pyd
+*.dll
+*.dylib
+*.spec
+
+# Bases de données locales
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE / OS
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
