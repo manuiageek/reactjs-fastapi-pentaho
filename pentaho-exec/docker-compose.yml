@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  pdi-exec:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pentaho-exec
+    working_dir: /opt/pdi
+    environment:
+      - TZ=Pacific/Tahiti
+      - PENTAHO_DI_JAVA_OPTIONS=-Xms512m -Xmx2g -Dfile.encoding=UTF-8
+    # kitchen en entrypoint, affiche version et sort
+    entrypoint: ["/opt/pdi/kitchen.sh"]
+    command: ["-version"]
