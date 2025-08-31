@@ -19,12 +19,15 @@ RUN set -eux; \
     mv /opt/data-integration /opt/pdi; \
     rm -f /tmp/pdi.zip; \
     find /opt/pdi -type f -name "*.sh" -exec chmod +x {} \; ; \
-    # supprimer plugin Google Drive si présent (évite erreurs au démarrage si non utilisé)
     rm -rf /opt/pdi/plugins/pentaho-googledrive-vfs* || true
 
+# wrapper et config
+COPY start-carte.sh /usr/local/bin/start-carte
+COPY carte-config.xml /opt/pdi/carte-config.xml
+RUN chmod +x /usr/local/bin/start-carte
+
+# dossier de travail par défaut
 WORKDIR /opt/pdi
 
-# lance directement kitchen.sh comme PID 1
-ENTRYPOINT ["/opt/pdi/kitchen.sh"]
-# aucun argument par défaut (tu dois fournir -file:/data/xxx.kjb ou un chemin)
-CMD ["-version"]
+# processus principal
+ENTRYPOINT ["/usr/local/bin/start-carte"]

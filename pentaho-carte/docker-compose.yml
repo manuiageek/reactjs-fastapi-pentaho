@@ -1,28 +1,30 @@
-version: "3.9"
-
 services:
-  pdi-jobs:
+  pdi-carte:
     build:
       context: .
       dockerfile: Dockerfile
-    image: pentaho-exec
-    working_dir: /opt/pdi
+    image: pentaho-install
     environment:
       - TZ=Pacific/Tahiti
       - PENTAHO_DI_JAVA_OPTIONS=-Xms512m -Xmx2g -Dfile.encoding=UTF-8
-      - KETTLE_LEVEL=Basic        # valeur par défaut      
-    # kitchen en entrypoint, affiche version et sort
-    entrypoint: ["/opt/pdi/kitchen.sh"]
-    command: ["-version"]
+      - PDI_MODE=carte
+      - CARTE_HOST=0.0.0.0
+      - CARTE_PORT=8080
+      - CARTE_USER=admin
+      - CARTE_PASS=changeit
+      - KETTLE_LEVEL=Basic
+    ports:
+      - "8080:8080"
     # montage volume pour jobs Pentaho
     volumes:
       - pentaho_jobs:/jobs:ro
-      - pentaho_output:/out:rw      
+      - pentaho_workdir:/workdir:rw     
+    restart: unless-stopped 
 
 # volume externe défini en top-level
 volumes:
   pentaho_jobs:
     external: true
-  pentaho_output:
+  pentaho_workdir:
     external: true
 
