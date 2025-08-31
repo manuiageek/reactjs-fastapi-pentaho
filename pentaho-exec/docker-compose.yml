@@ -10,14 +10,19 @@ services:
     environment:
       - TZ=Pacific/Tahiti
       - PENTAHO_DI_JAVA_OPTIONS=-Xms512m -Xmx2g -Dfile.encoding=UTF-8
+      - KETTLE_LEVEL=Basic        # valeur par défaut      
     # kitchen en entrypoint, affiche version et sort
     entrypoint: ["/opt/pdi/kitchen.sh"]
     command: ["-version"]
     # montage volume pour jobs Pentaho
     volumes:
       - pentaho_jobs:/jobs:ro
+      - pentaho_output:/out:rw      
 
 # volume externe défini en top-level
 volumes:
   pentaho_jobs:
     external: true
+  pentaho_output:
+    external: true
+
