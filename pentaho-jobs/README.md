@@ -1,4 +1,4 @@
-# Prérequis
+# Prérequis en volume externes
 docker volume create pentaho_jobs
 docker volume create pentaho_output
 
