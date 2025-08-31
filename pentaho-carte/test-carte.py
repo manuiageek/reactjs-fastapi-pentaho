@@ -19,8 +19,7 @@ try:
     r = requests.get(f"{BASE}/kettle/status/", params={"xml": "Y"}, auth=HTTPBasicAuth(user, password), timeout=TIMEOUT)
     if r.ok:
         print("OK")
-        sys.exit(0)
-    print(f"HTTP {r.status_code}")
+    print(f"HTTP {r.status_code} {r.reason}")
     sys.exit(1)
 except Exception as e:
     print(f"ERREUR: {e}")
